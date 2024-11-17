@@ -1,12 +1,16 @@
 import { useState } from 'react';
 
-function Player({ initailName, symbol, isActive }) {
+function Player({ initailName, symbol, isActive, onChangeName }) {
   const [playerName, setPlayerName] = useState(initailName);
   const [isEditing, setIsEditing] = useState(false);
 
   function handleEditClick() {
     // setIsEditing(!isEditing); // Bad - React Scheduling Update State
     setIsEditing((prevIsEditing) => !prevIsEditing); // Instead use function form
+
+    if (isEditing) {
+      onChangeName(symbol, playerName);
+    }
   }
 
   function handleChange(event) {
